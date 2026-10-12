@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { siteConfig } from "@/config/site";
 import {
   ArrowRight,
@@ -13,6 +14,7 @@ import {
   Building2,
   MapPin,
   FileText,
+  ExternalLink,
 } from "lucide-react";
 
 const workflowNodes = [
@@ -63,12 +65,24 @@ export function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Column: Core Positioning Copy & CTAs */}
           <div className="lg:col-span-7 space-y-6">
-            {/* Eyebrow */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-brand-border/80 dark:border-brand-border/80 border-light-border bg-brand-surface/60 dark:bg-brand-surface/60 bg-white/80 backdrop-blur-sm">
-              <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse" />
-              <span className="text-xs font-semibold tracking-wider uppercase text-brand-textSecondary dark:text-brand-textSecondary text-light-textSecondary">
-                TECHNOLOGY · SOLUTION CONSULTING · BUSINESS THINKING
-              </span>
+            {/* Eyebrow & Personal Avatar */}
+            <div className="flex items-center gap-3">
+              <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-brand-accent shadow-md shrink-0">
+                <Image
+                  src={siteConfig.avatarUrl}
+                  alt="Rushikesh Joshi"
+                  fill
+                  sizes="48px"
+                  className="object-cover object-top"
+                  priority
+                />
+              </div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-brand-border/80 dark:border-brand-border/80 border-light-border bg-brand-surface/60 dark:bg-brand-surface/60 bg-white/80 backdrop-blur-sm">
+                <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse" />
+                <span className="text-xs font-semibold tracking-wider uppercase text-brand-textSecondary dark:text-brand-textSecondary text-light-textSecondary">
+                  TECHNOLOGY · SOLUTION CONSULTING · BUSINESS THINKING
+                </span>
+              </div>
             </div>
 
             {/* Main Headline */}
@@ -106,6 +120,19 @@ export function HeroSection() {
               >
                 Explore My Journey
               </a>
+
+              {/* LinkedIn CTA */}
+              {siteConfig.linkedinUrl && siteConfig.linkedinUrl.trim() !== "" && (
+                <a
+                  href={siteConfig.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-4 py-3 rounded-xl border border-brand-border dark:border-brand-border border-light-border bg-brand-surface/60 dark:bg-brand-surface/60 bg-white/70 hover:border-brand-accent text-sm font-medium text-brand-textSecondary dark:text-brand-textSecondary text-light-textSecondary hover:text-brand-accent transition-colors"
+                >
+                  <span>LinkedIn</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              )}
 
               {/* Tertiary CTA: View Resume - only rendered if configured */}
               {siteConfig.resumeUrl && siteConfig.resumeUrl.trim() !== "" && (

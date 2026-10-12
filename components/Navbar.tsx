@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { ThemeToggle } from "./ThemeToggle";
-import { Menu, X, ArrowUpRight, MessageSquareCode } from "lucide-react";
+import { Menu, X, ArrowUpRight, MessageSquareCode, Linkedin } from "lucide-react";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -86,6 +86,20 @@ export function Navbar() {
         <div className="flex items-center gap-2 sm:gap-3">
           <ThemeToggle />
 
+          {/* LinkedIn quick link */}
+          {siteConfig.linkedinUrl && siteConfig.linkedinUrl.trim() !== "" && (
+            <a
+              href={siteConfig.linkedinUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-9 h-9 rounded-lg border border-brand-border dark:border-brand-border border-light-border bg-brand-surface dark:bg-brand-surface bg-white flex items-center justify-center text-brand-textSecondary hover:text-brand-accent hover:border-brand-accent transition-colors shadow-sm"
+              aria-label="Rushikesh Joshi on LinkedIn"
+              title="Rushikesh Joshi on LinkedIn"
+            >
+              <Linkedin className="w-4 h-4 text-[#0A66C2] dark:text-[#70B5F9]" />
+            </a>
+          )}
+
           {/* Resume link: strictly only shown if configured with a valid non-empty URL */}
           {siteConfig.resumeUrl && siteConfig.resumeUrl.trim() !== "" && (
             <a
@@ -135,6 +149,21 @@ export function Navbar() {
               {item.label}
             </a>
           ))}
+          {siteConfig.linkedinUrl && siteConfig.linkedinUrl.trim() !== "" && (
+            <a
+              href={siteConfig.linkedinUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsOpen(false)}
+              className="flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium text-brand-textSecondary dark:text-brand-textSecondary text-light-textSecondary hover:text-brand-accent text-[#0A66C2] dark:text-[#70B5F9]"
+            >
+              <span className="flex items-center gap-2">
+                <Linkedin className="w-4 h-4" />
+                <span>LinkedIn Profile</span>
+              </span>
+              <ArrowUpRight className="w-4 h-4" />
+            </a>
+          )}
           {siteConfig.resumeUrl && siteConfig.resumeUrl.trim() !== "" && (
             <a
               href={siteConfig.resumeUrl}

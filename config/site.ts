@@ -4,6 +4,7 @@ export interface SiteConfig {
   company: string;
   location: string;
   email: string;
+  avatarUrl: string;
   // External URLs - leave empty string to gracefully hide links/buttons
   linkedinUrl: string;
   resumeUrl: string;
@@ -21,8 +22,9 @@ export const siteConfig: SiteConfig = {
   company: "FireFlink",
   location: "Bengaluru, India (From Nagpur, Maharashtra)",
   email: "rj751054@gmail.com",
+  avatarUrl: "/images/rushikesh-joshi.jpg",
   // Configure real URLs here when available. When empty, buttons/links stay safely hidden.
-  linkedinUrl: "", // e.g. "https://www.linkedin.com/in/rushikesh-joshi"
+  linkedinUrl: "https://www.linkedin.com/in/rushikesh-joshi2004/",
   resumeUrl: "",   // e.g. "/resume.pdf" or external URL
   githubUrl: "https://github.com/Rushi04j",
   twitterUrl: "",

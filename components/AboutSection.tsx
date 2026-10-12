@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
+import { siteConfig } from "@/config/site";
 import {
   HeartHandshake,
   BookOpen,
@@ -9,6 +11,7 @@ import {
   HelpCircle,
   Sparkles,
   CheckCircle,
+  ExternalLink,
 } from "lucide-react";
 
 const aboutHighlights = [
@@ -108,20 +111,49 @@ export function AboutSection() {
 
           {/* Right Column: "A Little About Me" & Quick Badges */}
           <div className="lg:col-span-5 space-y-6">
-            {/* Tasteful Abstract Initials Graphic */}
-            <div className="rounded-2xl border border-brand-border dark:border-brand-border border-light-border bg-gradient-to-br from-brand-surface to-brand-surfaceElevated dark:from-brand-surface dark:to-brand-surfaceElevated from-white to-light-surfaceElevated p-6 text-center relative overflow-hidden shadow-md">
-              <div className="w-20 h-20 mx-auto rounded-2xl bg-brand-surface dark:bg-brand-surface bg-light-surfaceElevated border-2 border-brand-accent/40 flex items-center justify-center text-2xl font-black text-brand-accent mb-4 shadow-inner">
-                RJ
+            {/* Real Professional Profile Card with Photograph */}
+            <div className="rounded-2xl border border-brand-border dark:border-brand-border border-light-border bg-gradient-to-br from-brand-surface to-brand-surfaceElevated dark:from-brand-surface dark:to-brand-surfaceElevated from-white to-light-surfaceElevated p-6 text-center relative overflow-hidden shadow-lg group">
+              <div className="relative w-48 h-48 sm:w-56 sm:h-56 mx-auto mb-4 rounded-2xl overflow-hidden border-2 border-brand-accent/50 shadow-md">
+                <Image
+                  src={siteConfig.avatarUrl}
+                  alt="Rushikesh Joshi presenting on stage"
+                  fill
+                  sizes="(max-width: 640px) 192px, 224px"
+                  className="object-cover object-top hover:scale-105 transition-transform duration-500"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 pointer-events-none" />
+                <div className="absolute bottom-2 left-2 right-2 text-center">
+                  <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-[#10131A]/80 text-brand-accent backdrop-blur-sm border border-brand-accent/30 inline-block">
+                    Solution Consulting &amp; Demos
+                  </span>
+                </div>
               </div>
-              <h3 className="text-lg font-bold text-brand-textPrimary dark:text-brand-textPrimary text-light-textPrimary">
+
+              <h3 className="text-xl font-bold text-brand-textPrimary dark:text-brand-textPrimary text-light-textPrimary">
                 Rushikesh Joshi
               </h3>
               <p className="text-xs text-brand-textSecondary dark:text-brand-textSecondary text-light-textSecondary mt-0.5">
                 Associate Solution Consultant · FireFlink
               </p>
-              <div className="mt-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-accent/10 text-brand-accent text-xs font-medium">
-                <CheckCircle className="w-3.5 h-3.5" />
-                <span>Active US Market Engagements</span>
+
+              <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-accent/10 text-brand-accent text-xs font-medium">
+                  <CheckCircle className="w-3.5 h-3.5" />
+                  <span>US Market Engagements</span>
+                </div>
+
+                {siteConfig.linkedinUrl && (
+                  <a
+                    href={siteConfig.linkedinUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0A66C2]/15 text-[#0A66C2] dark:text-[#70B5F9] border border-[#0A66C2]/30 text-xs font-semibold hover:bg-[#0A66C2]/25 transition-colors"
+                  >
+                    <span>LinkedIn Profile</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                )}
               </div>
             </div>
 
