@@ -24,7 +24,7 @@ export const siteConfig: SiteConfig = {
   // Configure real URLs here when available. When empty, buttons/links stay safely hidden.
   linkedinUrl: "", // e.g. "https://www.linkedin.com/in/rushikesh-joshi"
   resumeUrl: "",   // e.g. "/resume.pdf" or external URL
-  githubUrl: "",   // e.g. "https://github.com/rushikeshjoshi"
+  githubUrl: "https://github.com/Rushi04j",
   twitterUrl: "",
   siteUrl: "https://rushikeshjoshi.dev",
   seoTitle: "Rushikesh Joshi | Technology, Business & Solution Consulting",
