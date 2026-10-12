@@ -46,9 +46,6 @@ npm run start
 ```
 Rushikesh_Portfolio/
 ├── app/
-│   ├── api/
-│   │   └── contact/
-│   │       └── route.ts         # Secure server-side email endpoint (Resend + rate limit + honeypot + mailto fallback)
 │   ├── globals.css              # Dark & light theme color tokens, accessible focus rings, scrollbars
 │   ├── layout.tsx               # Root layout, Inter font, SEO meta tags, OpenGraph, Viewport
 │   ├── page.tsx                 # Assembles all 10 portfolio sections
@@ -118,49 +115,13 @@ Open `content/experience.ts`:
 
 ---
 
-## 📬 Contact Form & Resend Email Integration
+## 📬 Contact & Direct Connection
 
-The contact form in `components/ContactSection.tsx` communicates with the server-side API endpoint at `app/api/contact/route.ts` powered by `@/lib/contact.ts`.
+The contact section in `components/ContactSection.tsx` is kept simple, direct, and distraction-free:
 
-### Security & Architecture Highlights:
-1. **Server-Side Validation:** Validates required fields, enforces length bounds, RFC email verification, and strips carriage returns (`\r`, `\n`) from headers to block email-header injection.
-2. **Spam & Abuse Defense:** Hidden honeypot field (`honeypot`) traps automated bots; sliding-window IP rate-limiting prevents flood requests.
-3. **HTML Sanitization:** Encodes HTML entities before generating email HTML bodies to neutralize script/HTML injection attacks.
-4. **Direct Reply-To:** Sets `replyTo` to the visitor's validated email address so hitting "Reply" in your email client immediately responds to the visitor.
-5. **Dynamic Mailto Fallback:** If `RESEND_API_KEY` is not yet configured or if provider delivery fails, the application generates a fully dynamic, URL-encoded `mailto:` link pre-filled with the visitor's **actual entered details** addressed strictly to `rj751054@gmail.com` (no sample or hardcoded test values).
-6. **Form UX Protection:** Input details are preserved on failure or unconfigured states. The form clears only after the server confirms delivery acceptance.
-
-### Step-by-Step: Enabling Live Email Delivery on Vercel
-
-#### Step 1: Obtain a Resend API Key
-1. Go to [resend.com](https://resend.com) and create an account using your email (`rj751054@gmail.com`).
-2. In the Resend Dashboard, navigate to **API Keys** and click **Create API Key**.
-3. Name it `Portfolio Contact` with **Sending access** (Full or Sending access).
-4. Copy the generated API key (format: `re_xxxxxxxxxxxxxxxxxxxxxxxxx`).
-
-#### Step 2: Add Environment Variables in Vercel
-1. Go to your Vercel Project Dashboard: [https://vercel.com/rushi831s-projects/rushikesh-portfolio/settings/environment-variables](https://vercel.com/rushi831s-projects/rushikesh-portfolio/settings/environment-variables).
-2. Add the following variables:
-   - **`RESEND_API_KEY`**: Paste your Resend API key (e.g. `re_...`).
-   - **`RESEND_FROM_EMAIL`**: 
-     - **Testing Mode (Immediate):** `Portfolio Contact <onboarding@resend.dev>`
-       *(In Resend free accounts, `onboarding@resend.dev` can only send to the email address registered on your Resend account, i.e. `rj751054@gmail.com`, which matches your contact form recipient perfectly).*
-     - **Production Mode (Custom Domain):** `Rushikesh Joshi <contact@rushikeshjoshi.dev>` (after verifying domain in Resend).
-   - **`CONTACT_TO_EMAIL`**: `rj751054@gmail.com`
-3. Click **Save**.
-
-#### Step 3: Trigger a Redeployment on Vercel
-> **IMPORTANT:** In Vercel, adding or changing environment variables applies only to *new deployments*. Existing running deployments will not have access to new environment variables until redeployed.
-1. In Vercel, navigate to the **Deployments** tab.
-2. Click the three dots (`...`) next to the latest production deployment and select **Redeploy**.
-3. Once the build completes (~40 seconds), your contact form will send emails directly to `rj751054@gmail.com`!
-
-### Local Development Configuration
-For local development, copy `.env.example` to `.env.local`:
-```bash
-cp .env.example .env.local
-```
-Add your `RESEND_API_KEY` into `.env.local` (which is gitignored).
+- **Direct Email:** Prominently displays `rj751054@gmail.com` with a one-click copy button (with immediate "Email Copied!" visual feedback) and a direct `mailto:` link.
+- **LinkedIn Profile:** Direct one-click link to [https://www.linkedin.com/in/rushikesh-joshi2004/](https://www.linkedin.com/in/rushikesh-joshi2004/) to connect or send a message.
+- **Zero Third-Party API Hassle:** No external transactional email provider, secret API keys, or serverless function dependencies required. Visitors can reach out directly where they already work.
 
 ---
 
@@ -180,10 +141,7 @@ This application is built for seamless zero-config deployment on Vercel:
 1. Push your code to GitHub.
 2. Go to [vercel.com](https://vercel.com) and click **"Add New Project"**.
 3. Import your repository.
-4. In the **Environment Variables** section, optionally add:
-   - `RESEND_API_KEY`
-   - `CONTACT_TO_EMAIL`
-   - `CONTACT_FROM_EMAIL`
+4. Zero environment variables required—deploy right out of the box!
 5. Click **Deploy**. Vercel will automatically build the Next.js application and assign a live production URL.
 
 ---
@@ -206,6 +164,6 @@ This application is built for seamless zero-config deployment on Vercel:
 | 4 Interactive Thinking Questions | ✅ PASS | Deep-dive investigation steps with keyboard accessibility |
 | Ideas & Notes with Modal Reader | ✅ PASS | 4 proposed topics with complete readable draft essays |
 | Skills Section with Honest Stages | ✅ PASS | Core Strength, Foundational, Practicing, Hands-On |
-| Contact Section & API | ✅ PASS | Direct email, copy button, server validation, Resend + mailto fallback |
+| Contact Section | ✅ PASS | Direct email with instant copy button, mailto, and LinkedIn profile link |
 | SEO, Sitemap, Robots, Favicon | ✅ PASS | Metatags, `/sitemap.xml`, `/robots.txt`, SVG RJ favicon |
 | No Fabricated Claims / Clean Positioning | ✅ PASS | Ambitious yet authentic pre-sales positioning |
