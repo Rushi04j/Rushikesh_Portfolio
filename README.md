@@ -120,25 +120,47 @@ Open `content/experience.ts`:
 
 ## 📬 Contact Form & Resend Email Integration
 
-The contact form in `components/ContactSection.tsx` communicates with the server-side API at `app/api/contact/route.ts`.
+The contact form in `components/ContactSection.tsx` communicates with the server-side API endpoint at `app/api/contact/route.ts` powered by `@/lib/contact.ts`.
 
-### Features:
-1. **Server-Side Validation:** Validates required fields, email format, and minimum message length.
-2. **Spam & Abuse Protection:** Hidden honeypot field (`honeypot`) silently traps automated bots; IP rate-limiting prevents burst attacks.
-3. **HTML Sanitization:** Prevents script injection while cleanly formatting email tables.
-4. **Resend Transactional Email:** Powered by [Resend](https://resend.com).
-5. **Fail-Safe Mailto Fallback:** If `RESEND_API_KEY` is not yet configured or if delivery fails, the UI notifies the visitor and generates a one-click pre-filled `mailto:` trigger directly addressed to `rj751054@gmail.com`.
+### Security & Architecture Highlights:
+1. **Server-Side Validation:** Validates required fields, enforces length bounds, RFC email verification, and strips carriage returns (`\r`, `\n`) from headers to block email-header injection.
+2. **Spam & Abuse Defense:** Hidden honeypot field (`honeypot`) traps automated bots; sliding-window IP rate-limiting prevents flood requests.
+3. **HTML Sanitization:** Encodes HTML entities before generating email HTML bodies to neutralize script/HTML injection attacks.
+4. **Direct Reply-To:** Sets `replyTo` to the visitor's validated email address so hitting "Reply" in your email client immediately responds to the visitor.
+5. **Dynamic Mailto Fallback:** If `RESEND_API_KEY` is not yet configured or if provider delivery fails, the application generates a fully dynamic, URL-encoded `mailto:` link pre-filled with the visitor's **actual entered details** addressed strictly to `rj751054@gmail.com` (no sample or hardcoded test values).
+6. **Form UX Protection:** Input details are preserved on failure or unconfigured states. The form clears only after the server confirms delivery acceptance.
 
-### Setting Up Live Email Delivery:
-1. Create a free account at [resend.com](https://resend.com).
-2. Generate an API key.
-3. Create `.env.local` in the project root:
-   ```env
-   RESEND_API_KEY=re_your_api_key_here
-   CONTACT_TO_EMAIL=rj751054@gmail.com
-   CONTACT_FROM_EMAIL=Portfolio Contact <onboarding@resend.dev>
-   ```
-   *(Note: For production custom domains, verify your domain in Resend and update `CONTACT_FROM_EMAIL=Portfolio Contact <contact@yourdomain.com>`)*.
+### Step-by-Step: Enabling Live Email Delivery on Vercel
+
+#### Step 1: Obtain a Resend API Key
+1. Go to [resend.com](https://resend.com) and create an account using your email (`rj751054@gmail.com`).
+2. In the Resend Dashboard, navigate to **API Keys** and click **Create API Key**.
+3. Name it `Portfolio Contact` with **Sending access** (Full or Sending access).
+4. Copy the generated API key (format: `re_xxxxxxxxxxxxxxxxxxxxxxxxx`).
+
+#### Step 2: Add Environment Variables in Vercel
+1. Go to your Vercel Project Dashboard: [https://vercel.com/rushi831s-projects/rushikesh-portfolio/settings/environment-variables](https://vercel.com/rushi831s-projects/rushikesh-portfolio/settings/environment-variables).
+2. Add the following variables:
+   - **`RESEND_API_KEY`**: Paste your Resend API key (e.g. `re_...`).
+   - **`RESEND_FROM_EMAIL`**: 
+     - **Testing Mode (Immediate):** `Portfolio Contact <onboarding@resend.dev>`
+       *(In Resend free accounts, `onboarding@resend.dev` can only send to the email address registered on your Resend account, i.e. `rj751054@gmail.com`, which matches your contact form recipient perfectly).*
+     - **Production Mode (Custom Domain):** `Rushikesh Joshi <contact@rushikeshjoshi.dev>` (after verifying domain in Resend).
+   - **`CONTACT_TO_EMAIL`**: `rj751054@gmail.com`
+3. Click **Save**.
+
+#### Step 3: Trigger a Redeployment on Vercel
+> **IMPORTANT:** In Vercel, adding or changing environment variables applies only to *new deployments*. Existing running deployments will not have access to new environment variables until redeployed.
+1. In Vercel, navigate to the **Deployments** tab.
+2. Click the three dots (`...`) next to the latest production deployment and select **Redeploy**.
+3. Once the build completes (~40 seconds), your contact form will send emails directly to `rj751054@gmail.com`!
+
+### Local Development Configuration
+For local development, copy `.env.example` to `.env.local`:
+```bash
+cp .env.example .env.local
+```
+Add your `RESEND_API_KEY` into `.env.local` (which is gitignored).
 
 ---
 
