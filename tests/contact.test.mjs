@@ -24,4 +24,11 @@ describe("Contact Information & Site Configuration", () => {
     assert.strictEqual(siteConfig.role, "Associate Solution Consultant");
     assert.strictEqual(siteConfig.company, "FireFlink");
   });
+
+  test("Projects section is removed from navItems", () => {
+    const hasProjectsNav = siteConfig.navItems.some(
+      (item) => item.label.toLowerCase() === "projects" || item.href === "#projects"
+    );
+    assert.strictEqual(hasProjectsNav, false);
+  });
 });

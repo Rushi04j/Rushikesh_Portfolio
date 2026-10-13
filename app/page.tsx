@@ -5,7 +5,6 @@ import { AboutSection } from "@/components/AboutSection";
 import { ExperienceSection } from "@/components/ExperienceSection";
 import { HowIThinkSection } from "@/components/HowIThinkSection";
 import { CaseStudiesSection } from "@/components/CaseStudiesSection";
-import { ProjectsSection } from "@/components/ProjectsSection";
 import { QuestionsSection } from "@/components/QuestionsSection";
 import { IdeasSection } from "@/components/IdeasSection";
 import { SkillsSection } from "@/components/SkillsSection";
@@ -22,7 +21,6 @@ export default function HomePage() {
         <ExperienceSection />
         <HowIThinkSection />
         <CaseStudiesSection />
-        <ProjectsSection />
         <QuestionsSection />
         <IdeasSection />
         <SkillsSection />

@@ -29,7 +29,7 @@ export function Footer() {
 
           {/* Quick nav links */}
           <nav className="flex flex-wrap justify-center gap-4 text-xs font-medium text-brand-textSecondary dark:text-brand-textSecondary text-light-textSecondary">
-            {siteConfig.navItems.slice(0, 6).map((item) => (
+            {siteConfig.navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
@@ -38,9 +38,6 @@ export function Footer() {
                 {item.label}
               </a>
             ))}
-            <a href="#contact" className="hover:text-brand-accent transition-colors">
-              Contact
-            </a>
           </nav>
 
           {/* Back to top */}

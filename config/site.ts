@@ -37,7 +37,6 @@ export const siteConfig: SiteConfig = {
     { label: "Experience", href: "#experience" },
     { label: "How I Think", href: "#how-i-think" },
     { label: "Case Studies", href: "#case-studies" },
-    { label: "Projects", href: "#projects" },
     { label: "Questions", href: "#questions" },
     { label: "Ideas & Notes", href: "#ideas" },
     { label: "Skills", href: "#skills" },

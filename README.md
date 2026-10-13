@@ -48,7 +48,7 @@ Rushikesh_Portfolio/
 ├── app/
 │   ├── globals.css              # Dark & light theme color tokens, accessible focus rings, scrollbars
 │   ├── layout.tsx               # Root layout, Inter font, SEO meta tags, OpenGraph, Viewport
-│   ├── page.tsx                 # Assembles all 10 portfolio sections
+│   ├── page.tsx                 # Assembles all 9 portfolio sections
 │   ├── robots.ts                # SEO robots.txt generator
 │   ├── sitemap.ts               # SEO sitemap.xml generator
 │   └── icon.svg                 # SVG monogram favicon
@@ -62,7 +62,6 @@ Rushikesh_Portfolio/
 │   ├── HowIThinkSection.tsx     # 4-stage framework: Listen, Ask, Connect, Evaluate + diagnostic questions
 │   ├── IdeasSection.tsx         # Working drafts & notes: Demo principles, Playwright questions, AI utility, problem thinking
 │   ├── Navbar.tsx               # Sticky navbar, active section indicator, theme toggle, mobile drawer
-│   ├── ProjectsSection.tsx      # Hands-on practice: API testing, discovery framework, SaaS evaluation model
 │   ├── QuestionsSection.tsx     # 4 deep interactive question cards with systematic investigation breakdown
 │   ├── SkillsSection.tsx        # Honest skills categorized with real progression stages (no fake percentages)
 │   ├── ThemeProvider.tsx        # Dark/light theme state with localStorage persistence (dark default)
@@ -74,7 +73,6 @@ Rushikesh_Portfolio/
 │   ├── experience.ts            # Work history, training, and education data
 │   ├── how-i-think.ts           # Problem-solving stages, actions, and principles
 │   ├── ideas.ts                 # Editorial draft essays and notes
-│   ├── projects.ts              # Projects, learning initiatives, and tool metadata
 │   ├── questions.ts             # Thinking questions with investigation steps
 │   └── skills.ts                # Skills categorized with verified stages
 ├── .env.example                 # Example environment variables for Resend email delivery
@@ -109,9 +107,8 @@ Open `content/experience.ts`:
 - The HSC junior college name can be specified when verified.
 - Clear separation is maintained between Full-Time, Internship, Vocational Training, and Academic Degrees.
 
-### 3. Adding New Projects or Articles
-- **Projects:** Edit `content/projects.ts` to add or update projects. If `repoUrl` or `demoUrl` is empty, an "Internal Learning" badge is displayed rather than a broken link.
-- **Ideas & Notes:** Edit `content/ideas.ts` to add new articles or notes. The reading modal will automatically render your paragraphs and takeaways.
+### 3. Adding New Articles or Notes
+Edit `content/ideas.ts` to add new articles or notes. The reading modal will automatically render your paragraphs and takeaways.
 
 ---
 
@@ -160,7 +157,6 @@ This application is built for seamless zero-config deployment on Vercel:
 | Experience & Education Timeline | ✅ PASS | Verified dates, distinct badges (Full-Time vs Intern vs Training) |
 | How I Think: 4 Stages | ✅ PASS | Listen, Ask, Connect, Evaluate with diagnostic questions |
 | 3 Detailed Case Studies | ✅ PASS | AI in context, Playwright vs Platform, relationship building |
-| Editable Projects Grid | ✅ PASS | API practice, discovery framework, graceful missing link handling |
 | 4 Interactive Thinking Questions | ✅ PASS | Deep-dive investigation steps with keyboard accessibility |
 | Ideas & Notes with Modal Reader | ✅ PASS | 4 proposed topics with complete readable draft essays |
 | Skills Section with Honest Stages | ✅ PASS | Core Strength, Foundational, Practicing, Hands-On |
